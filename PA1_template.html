@@ -215,6 +215,10 @@ mean_steps_interval &lt;- summarise(step_data_by_day, steps = mean(steps, na.rm=
 <p>In this section, we will reload the original dataset from the original activity.csv file into a new variable labeled step_data_NoNAs</p>
 <pre class="r"><code>step_data_NoNAs&lt;-read.csv(&quot;activity.csv&quot; )</code></pre>
 <p>Create a new dataset that is equal to the original dataset but with the missing data filled in.</p>
+<div id="strategy-for-filling-in-missing-data" class="section level3">
+<h3>Strategy for Filling in Missing Data</h3>
+<p>The mean values calculated above in the <em>mean_steps_interval</em> variable (steps per 5-min interval) are used to fill the missing step values.</p>
+<p>The following code chunk iterates over the <em>step_data_NoNAs</em> data frame looking for NA values. Once an NA value has been identified, the corresponding value from the <em>mean_steps_interval</em> calculation will be used to replace the NA value.</p>
 <pre class="r"><code>i&lt;-1
 for (i in 1:dim(step_data_NoNAs)[1]){
         if (is.na(step_data_NoNAs[i,1])){
@@ -223,6 +227,7 @@ for (i in 1:dim(step_data_NoNAs)[1]){
                 }
         i=i+1
 } </code></pre>
+</div>
 </div>
 <div id="make-a-histogram-of-the-total-number-of-steps-taken-each-day" class="section level2">
 <h2>Make a histogram of the total number of steps taken each day</h2>

@@ -261,6 +261,13 @@ step_data_NoNAs<-read.csv("activity.csv" )
 
 Create a new dataset that is equal to the original dataset but with the missing data filled in.
 
+###Strategy for Filling in Missing Data
+
+The mean values calculated above in the *mean_steps_interval* variable (steps per 5-min interval) are used to fill the missing step values.
+
+The following code chunk iterates over the *step_data_NoNAs* data frame looking for NA values. Once an NA value has been identified, the corresponding value from the *mean_steps_interval* calculation will be used to replace the NA value.
+
+
 ```r
 i<-1
 for (i in 1:dim(step_data_NoNAs)[1]){
